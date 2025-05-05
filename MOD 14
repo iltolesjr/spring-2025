@@ -1,0 +1,147 @@
+Module 14 Lab:  Superhero SQL Review 🦸🏽SQL Superhero
+
+Background 
+Today we'll review some of the fundamental concepts of the Structured Query Language (SQL) to help you prepare for creating your own database in the database project. In this fun activity, we're going to create a simple database to keep track of superheroes and their missions. Imagine you're in charge of managing all the superheroes in your city. You need to know who they are, what their secret identities are, and what missions they're working on. We'll use SQL to create tables to store this information, add superhero data, and then ask questions about our heroes and their adventures. By the end, you'll be able to find out which heroes are on a mission, how powerful they are, and even change their information if needed. It's like being the behind-the-scenes helper for a whole team of superheroes!  
+
+Prerequisites:
+
+Access to Oracle APEX
+Basic understanding of SQL
+
+Log into Oracle APEX
+In a new tab, Open the Oracle APEX instance for our class.
+
+🚫Please do not go directly to the commercial Oracle APEX site. We have our own instance that is set up and administered for Minneapolis College by your instructor.
+
+Click on the Go button for Oracle APEX.
+Go button
+
+Enter your new workspace, username, and password, then check Remember Workspace and Username. Click the Sign In button.
+
+Workspace: first initial plus last name
+                         Spelled as your name appears on the D2L classlist.
+                         For example, for Mary Lebens it is mlebens.
+
+Username: first initial plus last name
+                         Spelled as your name appears on the D2L classlist.
+                         For example, for Mary Lebens it is mlebens.
+
+Password: ITEC1375database   
+                       The letters ITEC are uppercase and the letters database are lowercase.
+
+Enter your first initial and lastname for the workspace and username.
+
+
+Click on SQL Workshop.
+SQL Workshop
+
+Click on SQL Commands.
+SQL Commands
+Instructions (In-Class Activity)
+Part 1: Create Tables (10 minutes)
+
+-- Create Heroes table
+CREATE TABLE Heroes (
+    HeroID NUMBER PRIMARY KEY,
+    HeroName VARCHAR2(50),
+    SecretIdentity VARCHAR2(50),
+    PowerLevel NUMBER
+);
+
+-- Create Missions table
+CREATE TABLE Missions (
+    MissionID NUMBER PRIMARY KEY,
+    MissionName VARCHAR2(100),
+    MissionDate DATE
+);
+
+-- Create HeroMissions table to represent many-to-many relationship
+CREATE TABLE HeroMissions (
+    HeroID NUMBER,
+    MissionID NUMBER,
+    FOREIGN KEY (HeroID) REFERENCES Heroes(HeroID),
+    FOREIGN KEY (MissionID) REFERENCES Missions(MissionID),
+    PRIMARY KEY (HeroID, MissionID)
+);
+Explanation: We create three tables. Heroes and Missions are our main entities, and HeroMissions is a junction table to represent the many-to-many relationship between Heroes and Missions.
+
+Part 2: Insert Data (10 minutes)
+
+-- Insert Heroes
+INSERT INTO Heroes (HeroID, HeroName, SecretIdentity, PowerLevel)
+VALUES (1, 'Spider-Man', 'Peter Parker', 8);
+
+INSERT INTO Heroes (HeroID, HeroName, SecretIdentity, PowerLevel)
+VALUES (2, 'Iron Man', 'Tony Stark', 9);
+
+INSERT INTO Heroes (HeroID, HeroName, SecretIdentity, PowerLevel)
+VALUES (3, 'Black Widow', 'Natasha Romanoff', 7);
+
+-- Insert Missions
+INSERT INTO Missions (MissionID, MissionName, MissionDate)
+VALUES (1, 'Save New York', TO_DATE('2023-07-04', 'YYYY-MM-DD'));
+
+INSERT INTO Missions (MissionID, MissionName, MissionDate)
+VALUES (2, 'Defeat Thanos', TO_DATE('2023-08-15', 'YYYY-MM-DD'));
+
+-- Assign Heroes to Missions
+INSERT INTO HeroMissions (HeroID, MissionID) VALUES (1, 1);
+INSERT INTO HeroMissions (HeroID, MissionID) VALUES (2, 1);
+INSERT INTO HeroMissions (HeroID, MissionID) VALUES (1, 2);
+INSERT INTO HeroMissions (HeroID, MissionID) VALUES (2, 2);
+INSERT INTO HeroMissions (HeroID, MissionID) VALUES (3, 2);
+Explanation: We insert sample data into our tables, including three heroes, two missions, and assign heroes to missions.
+
+Part 3: Queries (15 minutes)
+
+-- List all heroes and their secret identities
+SELECT HeroName, SecretIdentity FROM Heroes;
+
+-- Display all heroes who went on a specific mission
+SELECT h.HeroName
+FROM Heroes h
+JOIN HeroMissions hm ON h.HeroID = hm.HeroID
+WHERE hm.MissionID = 1;
+
+-- Find heroes with a power level greater than 8
+SELECT HeroName, PowerLevel
+FROM Heroes
+WHERE PowerLevel > 8;
+
+-- List missions in order of date
+SELECT MissionName, MissionDate
+FROM Missions
+ORDER BY MissionDate;
+Explanation: These queries demonstrate basic SELECT statements, JOINs, WHERE clauses, and ORDER BY.
+
+Part 4: Data Manipulation (10 minutes)
+
+-- Update a hero's power level
+UPDATE Heroes
+SET PowerLevel = 10
+WHERE HeroName = 'Iron Man';
+
+-- Remove a hero from a mission
+DELETE FROM HeroMissions
+WHERE HeroID = 3 AND MissionID = 2;
+Explanation: These statements show how to update existing data and delete specific records.
+
+Part 5: Clean Up (5 minutes)
+
+-- Delete all tables
+DROP TABLE HeroMissions;
+DROP TABLE Heroes;
+DROP TABLE Missions;
+Explanation: We drop the tables in reverse order of creation due to foreign key constraints.
+
+Remember: With great power comes great responsibility… to write clean and efficient SQL!
+
+
+How to Submit Your Lab
+Press Ctrl+A to select the SQL statements you've entered into the SQL Commands window.
+ 
+Press Ctrl+C to copy the SQL statements.
+
+Press Ctrl+V to paste the SQL statements into this assignment.
+
+Congratulations! After this lab, you're a SQL superhero, ready to conquer your database project! 🦸🏻‍♀️🦸🏽🦸🏻‍♂️🦸🏾‍♀️
