@@ -1,0 +1,45 @@
+```graph TD
+    %% ========== START ==========
+    A[High School Diploma or GED] 
+    A --> B[Choose Education Pathway]
+
+    %% ===== PATH 1: ASSOCIATE DEGREE =====
+    B --> C1[Associate Degree<br>(2 Years)]
+    C1 --> C1a["• CIT/IT Fundamentals<br>• Database Design (SQL Server Database LAST.txt)<br>• General Ed (Minnesota Transfer Curriculum.pdf)"]
+    C1a --> D1{Next Step?}
+    D1 --> D1a[Transfer to Bachelor's<br>(Transfer Agreements.pdf)]
+    D1 --> D1b[Enter Workforce<br>(e.g., IT Support, Junior Developer)]
+
+    %% ===== PATH 2: BACHELOR'S DEGREE =====
+    B --> C2[Bachelor's Degree<br>(4 Years)]
+    C2 --> C2a["• Computer Information Technology (Computer Information Technology major.pdf)<br>• Software Dev (Software Developer Program Information.pdf)<br>• Graduation Reqs (Graduation Requirements.pdf)"]
+    C2a --> D2{Specialize}
+    D2 --> D2a[Database Admin<br>(SQL Server Database LAST.txt)]
+    D2 --> D2b[Software Development<br>(ALL LAST ASSIGNMENTS.txt)]
+    D2 --> D2c[Networking/IT Management]
+    D2a --> E1[Workforce or Master's]
+    D2b --> E1
+    D2c --> E1
+
+    %% ===== PATH 3: CERTIFICATIONS =====
+    B --> C3[Certifications<br>(Parallel Option)]
+    C3 --> C3a["• SQL (mod11-sql.txt)<br>• Cloud/AWS<br>• CompTIA"]
+    C3a --> D3[Boost Career/Salary]
+
+    %% ===== CAREER OUTCOMES =====
+    D1b --> F[Career: IT Technician, Help Desk]
+    E1 --> F2[Career: Database Admin, Software Engineer, IT Analyst]
+    D3 --> F3[Career: Certified Specialist, Freelancer]
+
+    %% ===== PROJECTS/INTERNSHIPS =====
+    F --> G[Gain Experience]
+    F2 --> G
+    F3 --> G
+    G --> H[Internships/Projects<br>(ALL LAST ASSIGNMENTS.txt)]
+    H --> I[Advanced Degrees or Promotions]
+
+    %% ===== STYLING =====
+    classDef academic fill:#f9f,stroke:#333;
+    classDef career fill:#bbf,stroke:#333;
+    class C1,C2,C3 academic
+    class F,F2,F3 career```
